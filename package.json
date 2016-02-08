@@ -1,6 +1,6 @@
 {
   "name": "gamekit-auth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple node.js helper to auth an user using Apple GameKit",
   "main": "index.js",
   "scripts": {
