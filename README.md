@@ -40,15 +40,15 @@ class myCoolVc {
     func login(localPlayer: GKLocalPlayer, completionHandler: (NSError?) -> Void) {
         localPlayer.generateIdentityVerificationSignatureWithCompletionHandler { publicKeyUrl, signature, salt, timestamp, err in
             guard err == nil else { return completionHandler(err) }
-            
+
             let parameters = [
-                "playerId": playerId!,
+                "playerId": localPlayer.playerId!,
                 "publicKeyURL": publicKeyUrl!.absoluteString,
                 "signature": signature!.base64EncodedStringWithOptions([]),
                 "salt": salt!.base64EncodedStringWithOptions([]),
                 "timestamp": String(timestamp)
             ]
-            
+
             Alamofire.request(.POST, YOUR_API_URL, parameters: parameters, encoding: .JSON)
                 .validate()
                 .responseJSON { response in
@@ -75,7 +75,7 @@ var bundleIdentifier = 'com.cool-company.cool-app';
 
 function myCoolExressController(req, res, next) {
     gameKitAuth({
-        playerId: req.body.playerId
+        playerId: req.body.playerId,
         publicKeyURL: req.body.publicKeyURL,
         signature: req.body.signature,
         salt: req.body.salt,
